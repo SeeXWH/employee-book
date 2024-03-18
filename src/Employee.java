@@ -1,11 +1,11 @@
-public class employee {
+public class Employee {
     private int id;
     private float salary;
     private String name;
     private int department;
     private static int count = 0;
 
-    public employee(float salary, String name, int department) {
+    public Employee(float salary, String name, int department) {
         this.id = count;
         count += 1;
         this.salary = salary;
@@ -31,9 +31,7 @@ public class employee {
     }
     // сеттеры
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 
     public void setSalary(float salary) {
         this.salary = salary;
@@ -43,8 +41,6 @@ public class employee {
     public void setDepartment(int department) {
         if (department >= 1 && department <= 5) {
             this.department = department;
-        } else {
-            System.out.println("Введите номер департамента от 1 до 5");
         }
     }
 
@@ -54,7 +50,7 @@ public class employee {
         if (other == null || getClass() != other.getClass()) {
             return false;
         }
-        employee c = (employee) other;
+        Employee c = (Employee) other;
         return id == c.getId();
     }
 

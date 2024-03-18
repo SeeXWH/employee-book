@@ -1,7 +1,7 @@
-public class employeeBook {
-    private employee[] workers;
+public class EmployeeBook {
+    private Employee[] workers;
 
-    public void getWorker() {
+    public void printWorker() {
         for (int i = 0; i < workers.length; i++) {
             if (workers[i] != null) {
                 System.out.println(workers[i].toString());
@@ -9,13 +9,15 @@ public class employeeBook {
         }
     }
 
-    public employeeBook(int len) {
-        this.workers = new employee[len];
-
+    public EmployeeBook(int len) {
+        if (len < 0) {
+            throw new IllegalArgumentException("Длина не может быть отрицательной");
+        }
+        this.workers = new Employee[len];
     }
 
 
-    public float sum() {
+    public float summarize() {
         float count = 0;
         for (int i = 0; i < workers.length; i++) {
             if (workers[i] != null) {
@@ -25,7 +27,7 @@ public class employeeBook {
         return count;
     }
 
-    public String min() {
+    public String getMin() {
         String name = "";
         float count = 1000000000f;
         for (int i = 0; i < workers.length; i++) {
@@ -37,7 +39,7 @@ public class employeeBook {
         return name;
     }
 
-    public String max() {
+    public String getMax() {
         String name = "";
         float count = 0f;
         for (int i = 0; i < workers.length; i++) {
@@ -49,7 +51,7 @@ public class employeeBook {
         return name;
     }
 
-    public float middle() {
+    public float getMiddle() {
         float sum = 0;
         int count = 0;
         for (int i = 0; i < workers.length; i++) {
@@ -58,10 +60,16 @@ public class employeeBook {
                 count++;
             }
         }
-        return sum / count;
+        if (count > 0) {
+            return sum / count;
+        } else {
+            return -1;
+
+        }
+
     }
 
-    public void getFIO() {
+    public void printFIO() {
         for (int i = 0; i < workers.length; i++) {
             if (workers[i] != null) {
                 System.out.println(workers[i].getName());
@@ -69,7 +77,7 @@ public class employeeBook {
         }
     }
 
-    public void indexing(float ratio) {
+    public void indexTheSalary(float ratio) {
         for (int i = 0; i < workers.length; i++) {
             if (workers[i] != null) {
                 workers[i].setSalary(workers[i].getSalary() * (ratio / 100));
@@ -78,7 +86,7 @@ public class employeeBook {
     }
 
     // department metods
-    public String minDepartment(int department) {
+    public String getMinDepartment(int department) {
         String name = "";
         float count = 1000000000f;
         if (department >= 1 && department <= 5) {
@@ -95,7 +103,7 @@ public class employeeBook {
 
     }
 
-    public String maxDepartment(int department) {
+    public String getMaxDepartment(int department) {
         String name = "";
         float count = 0f;
         if (department >= 1 && department <= 5) {
@@ -112,7 +120,23 @@ public class employeeBook {
 
     }
 
-    public float middleDepartment(int department) {
+    public float getSalaryDepartment(int department) {
+        int count = 0;
+        float sum = 0f;
+        if (department >= 1 && department <= 5) {
+            for (int i = 0; i < workers.length; i++) {
+                if (workers[i] != null && workers[i].getDepartment() == department) {
+                    sum += workers[i].getSalary();
+                }
+            }
+            return sum;
+        } else {
+            return 0;
+        }
+
+    }
+
+    public float getMiddleDepartment(int department) {
         int count = 0;
         float sum = 0f;
         if (department >= 1 && department <= 5) {
@@ -122,14 +146,19 @@ public class employeeBook {
                     sum += workers[i].getSalary();
                 }
             }
-            return sum / count;
+            if (count > 0) {
+                return sum / count;
+            } else {
+                return -1;
+
+            }
         } else {
             return 0;
         }
 
     }
 
-    public void indexDepartment(int department, float ratio) {
+    public void indexTheSalaryDepartment(int department, float ratio) {
         if (department >= 1 && department <= 5) {
             for (int i = 0; i < workers.length; i++) {
                 if (workers[i] != null && workers[i].getDepartment() == department) {
@@ -152,7 +181,7 @@ public class employeeBook {
     }
 
     // 3---------------------------------------------
-    public void minCount(float count) {
+    public void printMinSalary(float count) {
         for (int i = 0; i < workers.length; i++) {
             if (workers[i] != null && workers[i].getSalary() < count) {
                 System.out.println(workers[i].getId() + " " + workers[i].getName() + " " + workers[i].getSalary());
@@ -160,7 +189,7 @@ public class employeeBook {
         }
     }
 
-    public void maxCount(float count) {
+    public void getMAxSalary(float count) {
         for (int i = 0; i < workers.length; i++) {
             if (workers[i] != null && workers[i].getSalary() >= count) {
                 System.out.println(workers[i].getId() + " " + workers[i].getName() + " " + workers[i].getSalary());
@@ -168,21 +197,17 @@ public class employeeBook {
         }
     }
 
-    public boolean addWorker(employee employee) {
-        int flag = 0;
+    public boolean addWorker(Employee employee) {
+        boolean flag = false;
         for (int i = 0; i < workers.length; i++) {
             if (workers[i] == null) {
                 workers[i] = employee;
-                flag = 1;
+                flag = true;
                 break;
             }
 
         }
-        if (flag == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return flag;
     }
 
     public void deleteWorker(int id) {
@@ -197,7 +222,7 @@ public class employeeBook {
     }
 
     public String getWorkerId(int id) {
-        int flag = 0;
+        int flag = -1;
         for (int i = 0; i < workers.length; i++) {
             if (workers[i].getId() == id) {
                 flag = i;
@@ -205,7 +230,7 @@ public class employeeBook {
             }
 
         }
-        if (flag != 0) {
+        if (flag >= 0) {
             return workers[flag].toString();
         } else {
             return null;
