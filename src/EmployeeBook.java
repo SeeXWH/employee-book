@@ -27,25 +27,25 @@ public class EmployeeBook {
         return count;
     }
 
-    public String getMin() {
-        String name = "";
+    public Employee getMin() {
+        Employee name = null;
         float count = 1000000000f;
         for (int i = 0; i < workers.length; i++) {
             if (workers[i] != null && workers[i].getSalary() < count) {
                 count = workers[i].getSalary();
-                name = workers[i].toString();
+                name = workers[i];
             }
         }
         return name;
     }
 
-    public String getMax() {
-        String name = "";
+    public Employee getMax() {
+        Employee name = null;
         float count = 0f;
         for (int i = 0; i < workers.length; i++) {
             if (workers[i] != null && workers[i].getSalary() > count) {
                 count = workers[i].getSalary();
-                name = workers[i].toString();
+                name = workers[i];
             }
         }
         return name;
@@ -86,14 +86,14 @@ public class EmployeeBook {
     }
 
     // department metods
-    public String getMinDepartment(int department) {
-        String name = "";
+    public Employee getMinDepartment(int department) {
+        Employee name = null;
         float count = 1000000000f;
         if (department >= 1 && department <= 5) {
             for (int i = 0; i < workers.length; i++) {
                 if (workers[i] != null && workers[i].getSalary() < count && workers[i].getDepartment() == department) {
                     count = workers[i].getSalary();
-                    name = workers[i].toString();
+                    name = workers[i];
                 }
             }
             return name;
@@ -103,14 +103,14 @@ public class EmployeeBook {
 
     }
 
-    public String getMaxDepartment(int department) {
-        String name = "";
+    public Employee getMaxDepartment(int department) {
+        Employee name = null;
         float count = 0f;
         if (department >= 1 && department <= 5) {
             for (int i = 0; i < workers.length; i++) {
                 if (workers[i] != null && workers[i].getSalary() > count && workers[i].getDepartment() == department) {
                     count = workers[i].getSalary();
-                    name = workers[i].toString();
+                    name = workers[i];
                 }
             }
             return name;
@@ -221,7 +221,7 @@ public class EmployeeBook {
 
     }
 
-    public String getWorkerId(int id) {
+    public Employee getWorkerId(int id) {
         int flag = -1;
         for (int i = 0; i < workers.length; i++) {
             if (workers[i].getId() == id) {
@@ -231,7 +231,7 @@ public class EmployeeBook {
 
         }
         if (flag >= 0) {
-            return workers[flag].toString();
+            return workers[flag];
         } else {
             return null;
         }

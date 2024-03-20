@@ -32,7 +32,6 @@ public class Employee {
     // сеттеры
 
 
-
     public void setSalary(float salary) {
         this.salary = salary;
     }

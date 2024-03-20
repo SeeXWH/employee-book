@@ -16,7 +16,7 @@ public class Main {
         crut.addWorker(workers4);
         crut.addWorker(workers5);
         crut.addWorker(workers6);
-        crut.printWorker();
+
     }
 
 
